@@ -1,0 +1,50 @@
+#include<stdio.h>
+int push(int stack[],int *top,int max,int val){
+    if(*top==max-1){
+        printf("Stack Overflow");
+    }
+    else{
+        (*top)++;
+        stack[*top]=val;
+    }
+}
+int pop(int stack[],int *top,int a){
+    if(*top==-1){
+        printf("Stack Underflow");
+    }
+    else{
+        a=stack[*top];
+        (*top)--;
+        return a;
+    }
+}
+int display(int stack[],int *top){
+    for(int i=0;i<=*top;i++){
+        printf("%d",stack[i]);
+    }
+}
+int main(){
+    int max,val,a,num;
+    int top=-1;
+    printf("enter the size of stack:");
+    scanf("%d",&max);
+    int stack[max];
+    while(1){
+        printf("enter 1 for push 2 for pop and 3 for display:");
+        scanf("%d",&num);
+        if (num==1){
+            printf("enter the number you want to insert:");
+            scanf("%d",&val);
+            push(stack,&top,max,val);
+        }
+        else if(num==2){
+            pop(stack,&top,a);
+        }
+        else if(num==3){
+            display(stack,&top);
+        }
+        else{
+            printf("invalid number");
+        }
+    }
+}
