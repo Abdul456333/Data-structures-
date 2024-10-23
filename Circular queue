@@ -1,0 +1,54 @@
+#include<stdio.h>
+void enqueue(int queue[],int *front,int *rear,int val,int max){
+    if(*front==(*rear+1)%max){
+        printf("Queue is full");
+    }
+    else if(*front==-1){
+        *front=0;
+    }
+    *rear=(*rear+1)%max;
+    queue[*rear]=val;
+}
+void dequeue(int queue[],int *front,int *rear,int max){
+    if(*front==-1){
+        printf("Queue is empty");
+    }
+    else if(*front==*rear){
+        *front=-1;
+        *rear=-1;
+    }
+    *front=(*front+1)%max;
+}
+void display(int queue[],int *front,int *rear,int max){
+    int i=*front;
+    while(i!=*rear){
+        printf("%d",queue[i]);
+        i=(i+1)%max;
+    }
+    printf("%d\n",queue[i]);
+}
+int main(){
+    int max,val,method;
+    int front=-1;
+    int rear=-1;
+    printf("Enter the size of the Circular Queue:");
+    scanf("%d",&max);
+    int queue[max];
+    while(1){
+        printf("Enter 1 for insertion,2 for deletion and 3 for display:");
+        scanf("%d",&method);
+        if(method==1){
+            printf("Enter the value to be inserted:");
+            scanf("%d",&val);
+            enqueue(queue,&front,&rear,val,max);
+        }
+        else if(method==2){
+            dequeue(queue,&front,&rear,max);
+        }
+        else if(method==3){
+            printf("Queue elements are:");
+            display(queue,&front,&rear,max);
+        }
+    }
+    return 0;
+}
