@@ -1,0 +1,51 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Node{
+    int data;
+    struct Node*next;
+};
+struct Node *head=NULL;
+void push(int val){
+    struct Node* newnode=(struct Node*)malloc(sizeof(struct Node));
+    newnode->data=val;
+    newnode->next=head;
+    head=newnode;
+}
+void pop(){
+    struct Node *temp;
+    if(head==NULL){
+        printf("Stack is Empty");
+        return;
+    }
+    else{
+        temp=head;
+        head=head->next;
+        free(temp);
+    }
+}
+void display(){
+    struct Node *temp=head;
+    while(temp!=NULL){
+        printf("%d->",temp->data);
+        temp=temp->next;
+    }
+    printf("NULL\n");
+}
+int main(){
+    int method,num;
+    while(1){
+        printf("Enter 1 to push\n2 to pop\n3 to display the stack:");
+        scanf("%d",&method);
+        switch(method){
+            case 1: printf("Enter the number to push in stack:");
+                    scanf("%d",&num);
+                    push(num);
+                    break;
+            case 2: pop();
+                    break;
+            case 3: display();
+                    break;
+        }
+    }
+return 0;
+}
