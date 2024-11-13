@@ -1,0 +1,119 @@
+#include<stdio.h>
+#include<stdlib.h>
+typedef struct Node{
+int data;
+struct Node*next;
+}Node;
+Node *createnode(int val){
+Node *Newnode=(Node*)malloc(sizeof(Node));
+if(Newnode==NULL){
+printf("memory allocation failed");
+}
+Newnode->data=val;
+Newnode->next=NULL;
+return Newnode;
+}
+Node*insertatbeginning(Node*head,int val){
+Node*Newnode=createnode(val);
+Newnode->next=head;
+return Newnode;
+}
+Node*concat(Node*head1,Node*head2){
+Node*temp=head1;
+while(temp->next!=NULL){
+temp=temp->next;
+}
+temp->next=head2;
+return head1;
+}
+Node*sort(Node*head){
+Node*temp,*current;
+int t;
+current=head;
+while(current!=NULL){
+temp=head;
+while(temp->next!=NULL){
+if(temp->data>temp->next->data){
+t=temp->data;
+temp->data=temp->next->data;
+temp->next->data=t;
+}
+temp=temp->next;
+}
+current=current->next;
+}
+return head;
+}
+Node*reverse(Node*head){
+Node*prev=NULL,*temp,*next;
+temp=head;
+while(temp!=NULL){
+next=temp->next;
+temp->next=prev;
+prev=temp;
+temp=next;
+}
+head=prev;
+return head;
+}
+void displaylists(Node*head1,Node*head2){
+printf("Linked List 1:");
+while(head1!=NULL){
+printf("%d->",head1->data);
+head1=head1->next;
+}
+printf("NULL\n");
+printf("Linked List 2:");
+while(head2!=NULL){
+printf("%d->",head2->data);
+head2=head2->next;
+}
+printf("NULL\n");
+
+}
+int main(){
+Node*list1=NULL;
+Node*list2=NULL;
+int method,num,listno;
+while(1){
+printf("enter 1 for insert at beginning\n2 for concatenation\n3 for sorting\n4 for reversing\n5 for displaying linked lists:");
+scanf("%d",&method);
+switch(method){
+case 1: printf("enter the number you want to insert");
+scanf("%d",&num);
+printf("enter 1 for insertion in list1 and 2 for list 2:");
+scanf("%d",&listno);
+if(listno==1){
+list1=insertatbeginning(list1,num);
+}
+else if(listno==2){
+list2=insertatbeginning(list2,num);
+}
+break;
+case 2: list1=concat(list1,list2);
+break;
+case 3: printf("enter 1 for sorting in list1 and 2 for list 2:");
+scanf("%d",&listno);
+if(listno==1){
+list1=sort(list1);
+}
+else if(listno==2){
+list2=sort(list2);
+}
+break;
+case 4: printf("enter 1 for reversing in list1 and 2 for list 2:");
+scanf("%d",&listno);
+if(listno==1){
+list1=reverse(list1);
+}
+else if(listno==2){
+list2=reverse(list2);
+}
+break;
+case 5: displaylists(list1,list2);
+break;
+
+}
+}
+return 0;
+}
