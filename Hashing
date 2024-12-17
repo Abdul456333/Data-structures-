@@ -1,0 +1,63 @@
+#include<stdio.h>
+void insert(int h[],int size,int data){
+    int index,i;
+    int hkey=data%size;
+    for(i=0;i<size;i++){
+        index=(hkey+i)%size;
+        if(h[index]==-1){
+            h[index]=data;
+            break;
+        }
+    }
+    printf("Number of Probes for %d is :%d \n",data,i+1);
+    if(i==size){
+        printf("\nElement cannot be inserted");
+    }
+}
+void search(int h[],int size,int data){
+    int i;
+    int hkey=data%size;
+    for(i=0;i<size;i++){
+        int index=(hkey+i)%size;
+        if(h[index]==data){
+            printf("Value is found at %d",index);
+            break;
+        }
+    }
+    if(i==size){
+        printf("Value is not found\n");
+    }
+}
+void display(int h[],int size){
+    printf("Elements in hash table are:");
+    for(int i=0;i<size;i++){
+        printf("Value at %d is :%d",i,h[i]);
+    }
+}
+int main(){
+    int size,method,num;
+    printf("Enter the size of hash table:");
+    scanf("%d",&size);
+    int h[size];
+    for(int i=0;i<size;i++){
+        h[i]=-1;
+    }
+    while(1){
+        printf("Enter 1 for insertion\n2 for searching\n3 for display\n");
+        scanf("%d",&method);
+        switch(method){
+            case 1: printf("Enter the number you want to enter:");
+                    scanf("%d",&num);
+                    insert(h,size,num);
+                    break;
+            
+            case 2: printf("Enter the  number you want to search:");
+                    scanf("%d",&num);
+                    search(h,size,num);
+                    break;
+
+            case 3: display(h,size);
+                    break;
+        }
+    }
+}
